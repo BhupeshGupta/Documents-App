@@ -1,0 +1,28 @@
+<div class="bar bar-subheader">
+    <h2 class="title">{{'INVOICE' | translate }}</h2>
+</div>
+<div>
+<br><br><br><br><br><br><br><br>
+    <div class="list">
+
+        <label class="item item-input item-select">
+            <div class="input-label">
+                {{'TYPE'| translate }}
+            </div>
+            <select ng-model="user_input.type">
+                <option selected>Consignment Note</option>
+                <option>{{'SALES_INVOICE' | translate }}</option>
+            </select>
+        </label>
+
+        <div class="list">
+            <label class="item item-input item-stacked-label">
+                <input type="text" placeholder="{{'DOCUMENT_NUMBER' | translate}}" ng-model="user_input.id">
+            </label>
+
+            <button class="button button-block button-positive" ng-click="getMetedata(user_input)"/>
+                {{'PULL_INVOICE_DETAILS' | translate }}
+            </button>
+        </div>
+    </div>
+</div>

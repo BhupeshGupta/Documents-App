@@ -1,0 +1,67 @@
+<ion-view>
+    <ion-content>
+        <div>
+            <div style="
+            white-space: nowrap;
+            overflow-y: hidden;
+            overflow-x: scroll;
+            padding-left: 10px
+            -webkit-overflow-scrolling: touch;
+            -webkit-tap-highlight-color:rgba(0,0,0,0);
+            width: 100%;
+            padding-top: 3.5vh
+            ">
+
+                <div ng-repeat="doc in docs" style="
+                display: inline-block;
+                vertical-align: top;
+                text-align: center;
+                width: 28.5%;
+                ">
+
+                    <img class="image-list-thumb doc-thumb-border-mask" style="
+                    width: 21.5vw;
+                    height: 21.5vw;
+                    object-fit: cover;
+                    vertical-align: top;
+                    " ng-src="{{doc.src}}" ng-click="showImage($index)" />
+
+                    <div style="
+                    font-family: 'Helvetica Neue', Roboto, Helvetica, sans-serif;
+                    font-size: 13px;
+                    line-height: 16px;
+                    padding: 0 0.5em;
+                    color: #4E4E4E;
+                    margin: 0;
+                    word-wrap: break-word;
+                    white-space: normal;
+                    ">{{ doc.label }}</div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="row" style="justify-content: space-around;">
+
+            <img style="
+            height: 60vh;
+            max-width: 90%;
+            " ng-src="{{selectedImage.src}}">
+
+            <nav class="glass" style="position: absolute; top: 70vh; height: 10vh; left: 0vh; z-index: 1; width: 100vw">
+                <div class="glass" style="height: 10vh; text-align: center; justify-content: space-around;">
+                    <button ng-click="showImagesInModel()" style="height:80%; width:25vw"><span style="font-size: 25px" class="ion-arrow-expand"></span></button>
+                    <button ng-click="deleteImage()" style="height:80%; width:25vw"><span style="font-size: 25px" class="ion-trash-b"></span></button>
+                    <button style="height:80%; width:25vw"><span style="font-size: 25px;" class="ion-refresh"></span></button>
+                </div>
+            </nav>
+        </div>
+        <div class="bar bar-footer">
+            <button class="col col-20 button button-right button-balanced">Back</button>
+            <button class="col col-20 col-offset-80 button button-right button-balanced" ng-click="computeMissingDocsAndGo()">Next</button>
+        </div>
+    </ion-content>
+
+</ion-view>

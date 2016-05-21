@@ -1,0 +1,47 @@
+<ion-view>
+    <ion-content>
+        <!-- Customer Details -->
+        <div class="list">
+            <label class="item item-input">
+                <span class="input-label">Customer Name</span>
+                <input type="text">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Mobile No.</span>
+                <input type="number">
+            </label>
+        </div>
+        <!-- Status -->
+        <div class="list item-divider">
+
+            <label class="item item-input item-stacked-label" style="background-color:#f5f5f5;">
+                <span class="input-label">Status</span>
+            </label>
+
+            <label class="item item-select" ng-repeat="doc in missingDocs">
+                <span class="input-label">{{ doc.label }}</span>
+                <select required>
+                    <option value="Our issue">Our issue</option>
+                    <option value="Customer issue">Customer issue</option>
+                    <option value="Pending with Customer">Pending with Customer</option>
+                    <option value="Other">Other</option>
+                </select>
+            </label>
+        </div>
+
+        <!-- Remarks -->
+        <div class="list item-divider">
+            <label class="item item-input item-stacked-label" style="background-color:#f5f5f5;">
+                <span class=" input-label ">Remarks</span>
+
+            </label>
+            <label class="item item-input ">
+                <textarea placeholder="Enter Remarks here " style="height: 100px "></textarea>
+            </label>
+        </div>
+    </ion-content>
+    <!-- Footer -->
+    <div class="bar bar-footer">
+        <button class="col col-30 col-offset-80 button button-right button-balanced" ng-click="pqr = ifc.uploadDoc();">Upload</button>
+    </div>
+</ion-view>

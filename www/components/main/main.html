@@ -1,0 +1,85 @@
+<ion-side-menus enable-menu-with-back-views="true">
+    <ion-side-menu-content edge-drag-threshold="true" drag-content="true">
+
+        <ion-nav-bar class="bar-positive">
+
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+
+            <ion-nav-title>
+                <h1 class="title">{{'ARUN_LOGISTICS_INVOICING_APP' | translate }}</h1>
+            </ion-nav-title>
+            <ion-nav-buttons side="right">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="right">
+                </button>
+            </ion-nav-buttons>
+        </ion-nav-bar>
+        <ion-nav-view></ion-nav-view>
+    </ion-side-menu-content>
+    <ion-side-menu side="right">
+        <ion-header-bar class="bar-positive">
+            <h1 class="title">Menu</h1>
+        </ion-header-bar>
+        <ion-content class="mainsidebar ion_outer">
+            <ion-list>
+                <ion-item menu-close ng-show="mc.SessionService.isLoggedIn()">
+                    <div class="item item-avatar admin_block">
+
+                        <img ng-src="{{ mc.SessionService.state.user.image }}" />
+                        <h2>{{ mc.SessionService.state.user.fullname }}</h2>
+                        <p ng-click="mc.SessionService.logout()">Logout</p>
+                    </div>
+                </ion-item>
+                <ion-item menu-close>
+                    <div ng-show="location_lock == 0">
+                        <i class="ion-ios-location-outline"></i>
+                        <span class="list_dtl">{{'GPS_LOCKING' | translate}}</span>
+                    </div>
+                    <div ng-show="location_lock == 1">
+                        <i class="ion-ios-location-outline"></i>
+                        <span class="list_dtl">GPS Locked</span>
+                    </div>
+                    <div ng-show="location_lock == 2">
+                        <i class="ion-ios-location-outline"></i>
+                        <span class="list_dtl">GPS Retrying</span>
+                    </div>
+                </ion-item>
+                <ion-item ng-init="languageGroupShown=false;">
+                    <span on-tap="languageGroupShown=!languageGroupShown">
+                        <i class="icon accordian_icon" ng-class="languageGroupShown ? 'ion-minus' : 'ion-plus'"></i>
+                        <i class="ion-android-globe "></i><span class="list_dtl">{{'SELECT_LANGUAGE' | translate}}</span>
+                    </span>
+                    <div ng-show="languageGroupShown">
+                        <ion-item ng-click="switchLanguage('en')" class="item-accordion">
+                            <span class="s_sub_list"><input type="radio" name="lang" ng-checked="mc.selectedLangage == 'en'"/><label>English</label></span>
+                        </ion-item>
+                        <ion-item ng-click="switchLanguage('hi')" class="item-accordion">
+                            <span class="s_sub_list"><input type="radio" name="lang" ng-checked="mc.selectedLangage == 'hi'"/><label>हिन्दी</label></span>
+                        </ion-item>
+                    </div>
+                </ion-item>
+                <ion-item menu-close ng-click="open_developer_pane()">
+                    <i class="ion-code "></i>
+                    <span class="list_dtl">{{'DEVELOPER_OPTIONS' | translate}}</span>
+                </ion-item>
+                <!--
+                <ion-item menu-close href="#/app/playlists">
+                    <span class="list_dtl">{{'CHECK_FOR_UPDATE' | translate}}</span>
+                </ion-item>
+                <ion-item menu-close href="#/app/playlists">
+                    <span class="list_dtl">{{'UPDATE' | translate}}</span>
+                </ion-item>
+                -->
+                <ion-item>
+                    <i ng-class="mc.uploading?'fa fa-cog fa-spin': 'ion-ios-cloud-upload-outline'"></i>
+                    <span ng-click="mc.triggerUpload()" ng-disabled="mc.uploading" class="list_dtl">{{'UPLOAD' | translate}} ({{ mc.pendingUploadCount }})</span>
+                </ion-item>
+                <ion-item>
+                    <i class="ion-ionic"></i>
+                    <span class="list_dtl">{{'VERSION' | translate}} {{ mc.appVersion }}</span>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+
+</ion-side-menus>

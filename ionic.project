@@ -1,0 +1,15 @@
+{
+  "name": "Field",
+  "app_id": "",
+  "proxies": [
+      {
+        "path": "/api",
+        "proxyUrl": "http://localhost:8080"
+      },
+      {
+      "path": "/review",
+      "proxyUrl":"http://localhost:1337"
+      }
+
+  ]
+}

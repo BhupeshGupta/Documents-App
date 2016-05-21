@@ -1,0 +1,35 @@
+<div class="bar bar-subheader">
+    <h2 class="title">{{'INVOICE' | translate }}</h2>
+</div>
+<ion-view>
+    <ion-content>
+
+
+        <br>
+        <br>
+        <div class="row">
+            <div class="col" align="center">
+                <button class="button" style="background-color: rgba(255,0,255, 0);" ng-click="scanBarcode()">
+                    <img src="img/qr.png" height="40%" width="90%">
+                    <br>{{'SCAN' | translate }} QR Code
+                </button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col" align="center">
+                <p>OR</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" align="center">
+                <button class="button" style="background-color: rgba(255,0,255, 0);" ui-sref="root.invoice.step1-1">
+                    <img src="img/enter.png" height="60%" width="90%">
+                    <br> {{'ENTER_MANUALLY' | translate }}
+                </button>
+            </div>
+        </div>
+
+
+    </ion-content>
+</ion-view>
