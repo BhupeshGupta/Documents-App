@@ -1,0 +1,216 @@
+'use strict';
+
+angular.module('starter')
+    .controller('ChequeController', chequeController);
+
+function chequeController($scope, DocumentService, $cordovaCamera, $http, SettingsFactory, FileFactory) {
+    var cq = this;
+    cq.captureCameraImage = takePhoto;
+    cq.addImage = addPayinSlipPhoto;
+
+
+    cq.payslipImages = [];
+
+    cq.user_input = {};
+    cq.chequeDataUpload = chequeDataUpload;
+
+    $scope.company_search = function (query) {
+        return DocumentService.search('Company', query, {})
+            .then(function (data) {
+                return data.results;
+            });
+    };
+
+    $scope.account_search = function (query, company) {
+        return DocumentService.search('Account', query, {
+                company: company
+            })
+            .then(function (data) {
+                return data.results;
+            });
+    };
+
+    $scope.bank_account_search = function (query, company) {
+        return DocumentService.search('Account', query, {
+                company: company
+            })
+            .then(function (data) {
+                return data.results;
+            });
+    };
+
+    $scope.chequeList = {
+        selected: [],
+        selectable: [
+            {
+                "chequeDate": "2016-05-16T00:00:00.000Z",
+                "bankOfCheque": "jk",
+                "chequeNumber": "1234567",
+                "customerAccount": "Zenith Coaters",
+                "amount": 123698,
+                "id": 3,
+                "createdAt": "2016-05-17T06:11:01.000Z",
+                "updatedAt": "2016-05-19T13:19:19.000Z",
+                "transactionId": null,
+                company: "Arun Logistics"
+            },
+            {
+                "chequeDate": "2016-05-16T00:00:00.000Z",
+                "bankOfCheque": "Bank of baroda ",
+                "chequeNumber": "123456",
+                "customerAccount": "Mansarovar Impex",
+                "amount": 12369900,
+                "id": 1,
+                "createdAt": "2016-05-17T05:37:28.000Z",
+                "updatedAt": "2016-05-17T06:10:01.000Z",
+                "transactionId": null,
+                company: "Mosaic Enterprises"
+            },
+            {
+                "chequeDate": "2016-05-16T00:00:00.000Z",
+                "bankOfCheque": "Dena Bank",
+                "chequeNumber": "1234567",
+                "customerAccount": "Aarti Steels",
+                "amount": 123698,
+                "id": 3,
+                "createdAt": "2016-05-17T06:11:01.000Z",
+                "updatedAt": "2016-05-19T13:19:19.000Z",
+                "transactionId": null,
+                company: "Arun Logistics"
+            },
+            {
+                "chequeDate": "2016-05-16T00:00:00.000Z",
+                "bankOfCheque": "State Bank Of India ",
+                "chequeNumber": "123456",
+                "customerAccount": "Avon Cycles",
+                "amount": 12369900,
+                "id": 1,
+                "createdAt": "2016-05-17T05:37:28.000Z",
+                "updatedAt": "2016-05-17T06:10:01.000Z",
+                "transactionId": null,
+                company: "Mosaic Enterprises"
+          }
+        ],
+        others: [],
+        postDated: []
+    };
+
+    $scope.selectCheque = function (index) {
+        var cheque = $scope.chequeList.selectable.splice(index, 1)[0];
+        $scope.chequeList.selected.push(cheque);
+
+        if ($scope.chequeList.others.length === 0) {
+            var selectable = _.filter($scope.chequeList.selectable, function (o) {
+                return o.company == cheque.company;
+            });
+
+            var others = _.filter($scope.chequeList.selectable, function (o) {
+                return o.company != cheque.company;
+            });
+
+            $scope.chequeList.selectable = selectable;
+            $scope.chequeList.others = others;
+        }
+    };
+
+    $scope.unselectCheque = function (index) {
+        var cheque = $scope.chequeList.selected.splice(index, 1)[0];
+        $scope.chequeList.selectable.push(cheque);
+
+        if ($scope.chequeList.selected.length === 0) {
+            var others = $scope.chequeList.others.splice(0, $scope.chequeList.others.length);
+            var selectable = $scope.chequeList.selectable.concat(others);
+            $scope.chequeList.selectable = selectable;
+        }
+    };
+
+
+
+
+    // Capture & dump file
+
+    function takePhoto() {
+        var options = {
+            quality: 75,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+        };
+
+        return $cordovaCamera.getPicture(options).then(
+            function (imageURI) {
+                var image_name = imageURI.substring(imageURI.lastIndexOf('/') + 1);
+                return FileFactory.moveFileFromCameraToExtrenalDir(image_name);
+            }).then(
+            function (fileInfo) {
+                $cordovaCamera.cleanup();
+                return $q.when(fileInfo);
+            });
+    }
+
+    $scope.choosePhoto = function () {
+        var options = {
+            quality: 75,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+        };
+    };
+
+    function addPayinSlipPhoto() {
+        //add more images
+
+        var options = {
+
+            quality: 75,
+            destinationType: Camera.DestinationType.DATA_URL,
+            sourceType: Camera.PictureSourceType.CAMERA,
+            encodingType: Camera.EncodingType.JPEG,
+            targetWidth: 300,
+            targetHeight: 300,
+            popoverOptions: CameraPopoverOptions,
+            saveToPhotoAlbum: false
+
+        };
+
+        $cordovaCamera.getPicture(options).then(function (imageData) {
+            cq.payslipImages.push("data:image/jpeg;base64," + imageData);
+        }, function (err) {
+            // An error occured. Show a message to the user
+        });
+    }
+    $scope.removeImage = function (index) {
+        cq.payslipImages.splice(index, 1);
+    };
+
+
+    function chequeDataUpload() {
+        return $http({
+            url: SettingsFactory.getReviewServerBaseUrl() + "/cheque",
+            loading: true,
+            method: 'POST',
+            data: prepareForErp(cq.user_input),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    }
+
+    function prepareForErp(data) {
+        // Create a deep copy
+        var transformed_data = JSON.parse(JSON.stringify(data));
+        transformed_data.customerAccount = transformed_data.customerAccount.value;
+        transformed_data.companyname = transformed_data.companyname.value;
+        transformed_data.transaction_date = moment(transformed_data.transaction_date).format("YYYY-MM-DD");
+        transformed_data.chequedate = moment(transformed_data.chequedate).format("YYYY-MM-DD");
+        return transformed_data;
+    }
+}

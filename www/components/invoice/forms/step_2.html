@@ -1,24 +1,16 @@
-<ion-view>
+<ion-view class="invoice_r">
     <div class="bar bar-subheader">
         <h2 class="title">Invoice Review</h2>
     </div>
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
-    <ion-content>
-
+    <ion-content class="body_content">
         <!-- <ion-scroll direction="x" class="available-scroller"> -->
-            <ion-item ng-repeat="item in metadata_list">
-                {{item.key}}: {{item.value}}
-                <br>
-            </ion-item>
+        <ion-item ng-repeat="item in metadata_list">
+            {{item.key}}: {{item.value}}
+            <br>
+        </ion-item>
         <!-- </ion-scroll> -->
-
-        <button class="button button-block button-positive" ui-sref="root.invoice.step3">
-            Next
-        </button>
-
+        <div class="btnnext_main">
+            <button class="btn-next" ui-sref="root.invoice.step3">Next</button>
+        </div>
     </ion-content>
 </ion-view>

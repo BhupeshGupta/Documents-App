@@ -2,11 +2,11 @@
 <widget id="com.ionicframework.field573625" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Invoicing App</name>
   <description>
-        An Ionic Framework and Cordova project.
-    </description>
+            An Ionic Framework and Cordova project.
+        </description>
   <author email="you@example.com" href="http://example.com.com/">
-      Your Name Here
-    </author>
+            Your Name Here
+        </author>
   <content src="index.html"/>
   <access origin="*"/>
   <preference name="webviewbounce" value="false"/>
@@ -18,5 +18,16 @@
   <feature name="StatusBar">
     <param name="ios-package" onload="true" value="CDVStatusBar"/>
   </feature>
+  <platform name="android">
+    <preference name="AndroidPersistentFileLocation" value="Compatibility"/>
+    <preference name="orientation" value="portrait"/>
+    <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external"/>
+    <access origin="cdvfile:*"/>
+    <allow-navigation href="cdvfile:*"/>
+    <allow-navigation href="http://*/*"/>
+    <allow-intent href="cdvfile:*"/>
+  </platform>
+  <plugin name="cordova-plugin-fastrde-checkgps" spec="https://github.com/fastrde/cordova-plugin-fastrde-checkgps.git"/>
+  <plugin name="cordova-plugin-file" spec="~4.1.1"/>
   <plugin name="phonegap-plugin-barcodescanner" spec="https://github.com/phonegap/phonegap-plugin-barcodescanner.git"/>
 </widget>

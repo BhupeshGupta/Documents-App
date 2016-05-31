@@ -1,28 +1,31 @@
+<div class="invoice_main">
+    <!--
 <div class="bar bar-subheader">
     <h2 class="title">{{'INVOICE' | translate }}</h2>
 </div>
-<div>
-<br><br><br><br><br><br><br><br>
-    <div class="list">
-
-        <label class="item item-input item-select">
-            <div class="input-label">
-                {{'TYPE'| translate }}
-            </div>
-            <select ng-model="user_input.type">
-                <option selected>Consignment Note</option>
-                <option>{{'SALES_INVOICE' | translate }}</option>
-            </select>
-        </label>
-
+-->
+    <div class="body_content">
         <div class="list">
-            <label class="item item-input item-stacked-label">
-                <input type="text" placeholder="{{'DOCUMENT_NUMBER' | translate}}" ng-model="user_input.id">
-            </label>
-
-            <button class="button button-block button-positive" ng-click="getMetedata(user_input)"/>
-                {{'PULL_INVOICE_DETAILS' | translate }}
-            </button>
+            <div class="input_group select_group">
+                <label class="item item-input item-select">
+                    <div class="input-label">
+                        {{'TYPE'| translate }}
+                    </div>
+                    <select ng-model="user_input.type">
+                        <option selected>Consignment Note</option>
+                        <option>{{'SALES_INVOICE' | translate }}</option>
+                    </select>
+                </label>
+            </div>
+            <div class="input_group" ng-init="user_input.id='SCN-05255'">
+                <label class=" item item-input item-stacked-label "> </label>
+                <input type="text " placeholder="{{ 'DOCUMENT_NUMBER' | translate}} " ng-model="user_input.id ">
+            </div>
         </div>
     </div>
+    <ion-footer-bar class="pd20 ">
+        <div class="btnnext_main ">
+            <button class="btn-next " ng-click="getMetedata(user_input) ">{{'PULL_INVOICE_DETAILS' | translate }}</button>
+        </div>
+    </ion-footer-bar>
 </div>

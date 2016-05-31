@@ -15,7 +15,8 @@
     "jquery": "^2.2.1",
     "html2canvas": "^0.4.1",
     "components-font-awesome": "^4.5.0",
-    "ngstorage": "^0.3.10"
+    "ngstorage": "^0.3.10",
+    "lodash": "^4.13.1"
   },
   "resolutions": {
     "moment": "~2.11.1"

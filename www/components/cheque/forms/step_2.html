@@ -1,0 +1,53 @@
+<ion-view class="invoice_r">
+    <div class="bar bar-subheader">
+        <h2 class="title">Cheque Detail</h2>
+    </div>
+    <ion-content class="body_content">
+        <!-- <ion-scroll direction="x" class="available-scroller"> -->
+        <div class="content_dtl cheque_edit_dtl">
+            <div class="input_field_list">
+                <form name="GR_Form" novalidate class="form_inner">
+                    <ion-list>
+                        <!--  Shortage  -->
+                        <ion-item class="item item-input item-stacked-label icon_field">
+                            <label>Posting Date</label>
+                            <input name="date" type="date" ng-model="cq.user_input.transaction_date " required>
+                            <span class="date_icon"> <i class="fa fa-calendar"></i></span>
+                        </ion-item>
+                        <ion-item class="item item-input item-stacked-label icon_field">
+                            <label>Cheque Date</label>
+                            <input name="date" type="date" ng-model="cq.user_input.chequedate" required>
+                            <span class="date_icon"> <i class="fa fa-calendar"></i></span>
+                        </ion-item>
+
+                        <ion-item class="item item-input item-stacked-label icon_field">
+                            <label>Company Name</label>
+                            <input name="company_name" ion-autocomplete type="text" class="ion-autocomplete" ng-model="cq.user_input.companyname" item-view-value-key="value" max-selected-items="1" items-method="company_search(query)" placeholder="" required />
+                        </ion-item>
+                        <ion-item class="item item-input item-stacked-label icon_field">
+                            <label>Customer Account</label>
+                            <input name="vehicle_number" ion-autocomplete type="text" class="ion-autocomplete" ng-model="cq.user_input.customerAccount" item-view-value-key="value" max-selected-items="1" items-method="account_search(query, cq.user_input.companyname.value)" placeholder="" required />
+
+                        </ion-item>
+                        <ion-item class="item item-input item-stacked-label icon_field">
+                            <label>Amount</label>
+                            <input type="text " placeholder="Amount " ng-model="cq.user_input.amount ">
+                        </ion-item>
+                        <ion-item class="item item-input item-stacked-label icon_field">
+                            <label>Cheque Number</label>
+                            <input type="text " ng-model="cq.user_input.chequeNumber" placeholder="Cheque Number ">
+                        </ion-item>
+                        <ion-item class="item item-input item-stacked-label icon_field">
+                            <label>Cheque Bank Name</label>
+                            <input type="text " placeholder="Bank " ng-model="cq.user_input.bankOfCheque">
+                        </ion-item>
+                    </ion-list>
+                </form>
+            </div>
+        </div>
+        <div class="btnnext_main">
+            <button class="btn-next" ui-sref="root.cheque.step3">Next</button>
+        </div>
+        <!-- </ion-scroll> -->
+    </ion-content>
+</ion-view>

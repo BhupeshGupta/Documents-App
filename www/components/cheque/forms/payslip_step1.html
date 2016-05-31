@@ -1,0 +1,79 @@
+<div class="main_page">
+    <ion-view>
+        <ion-content class="pay_slip">
+            <div class="body_content">
+                <ion-list>
+
+                    <!-- selected item block start here -->
+                    <ion-item class="item item-input item-stacked-label icon_field">
+                        <h2>Seleted</h2>
+                        <span class="payslip_items" ng-repeat="cheque in chequeList.selected">
+                            <ion-checkbox ng-model="cheque.selected" ng-change="unselectCheque($index)">
+                                <label>
+                                    <span class="date ">Date:12-05-2016</span>
+                        <span class="cheque_no ">Cheque No :{{cheque.chequeNumber}}</span>
+                        </label>
+                        <p>{{cheque.customerAccount}}</p>
+                        </ion-checkbox>
+                        </span>
+                    </ion-item>
+                    <!-- selected item block end here -->
+
+                    <!-- same company block start here -->
+                    <ion-item class="item item-input item-stacked-label icon_field">
+                        <h2>Same Company</h2>
+                        <span class="payslip_items" ng-repeat="sameCheque in chequeList.selectable">
+                            <ion-checkbox ng-model="cheque.selected" ng-change="selectCheque($index)">
+                                <label>
+                                    <span class="date ">Date:12-05-2016</span>
+                        <span class="cheque_no ">Cheque No :{{sameCheque.chequeNumber}}</span>
+                        </label>
+                        <p>{{sameCheque.customerAccount}}</p>
+                        </ion-checkbox>
+                        </span>
+                    </ion-item>
+                    <!-- same Company block end here -->
+
+                    <!-- others block start here -->
+                    <ion-item class="item item-input item-stacked-label icon_field">
+                        <h2>Others</h2>
+                        <span class="payslip_items" ng-repeat="cheque in chequeList.others">
+                            <ion-checkbox ng-model="cheque.selected" ng-disabled="true">
+                                <label>
+                                    <span class="date ">Date:12-05-2016</span>
+                        <span class="cheque_no ">Cheque No :{{cheque.chequeNumber}}</span>
+                        </label>
+                        <p>{{cheque.customerAccount}}</p>
+                        </ion-checkbox>
+                        </span>
+                    </ion-item>
+                    <!-- others block end here -->
+
+                    <!-- posted cheque  start here -->
+                    <ion-item class="item item-input item-stacked-label icon_field">
+                        <h2>Posted Cheque</h2>
+                        <span class="payslip_items" ng-repeat="cheque in chequeList.postDated">
+                            <ion-checkbox ng-model="cheque.selected" ng-disabled="true">
+                                <label>
+                                    <span class="date ">Date:12-05-2016</span>
+                        <span class="cheque_no ">Cheque No :{{cheque.chequeNumber}}</span>
+                        </label>
+                        <p>{{cheque.customerAccount}}</p>
+                        </ion-checkbox>
+                        </span>
+                    </ion-item>
+                    <!-- posted cheque end here -->
+                </ion-list>
+                <div class="btnnext_main ">
+                    <div class="row ">
+                        <button class="btn-next " ui-sref="root.cheque.payslipStep2 ">Next</button>
+                    </div>
+                </div>
+            </div>
+
+        </ion-content>
+
+
+
+    </ion-view>
+</div>

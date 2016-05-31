@@ -6,7 +6,7 @@ angular.module('starter')
 
 
 function homeController($state) {
-  var vm = this;
+    var vm = this;
 
     vm.cashFlow = function () {
         $state.go('root.cash.details');
@@ -17,7 +17,7 @@ function homeController($state) {
     };
 
     vm.chequeFlow = function () {
-        $state.go('root.cheque.details');
+        $state.go('root.cheque.step1');
     };
 
     console.log("Hi from Home Controller");

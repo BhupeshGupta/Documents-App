@@ -1,0 +1,47 @@
+<div class="main_page">
+    <ion-view>
+        <ion-content class="body_content pay_slipdtl">
+            <div class="content_dtl cheque_edit_dtl">
+                <div class="input_field_list">
+                    <div class="cheque_item_detail">
+                        <h2 class="title">Payin Slip Detail</h2>
+                    </div>
+                    <div>
+                        <form name="GR_Form" novalidate class="form_inner">
+                            <ion-list>
+                                <!--  Shortage  -->
+                                <ion-item class="item item-input item-stacked-label icon_field">
+                                    <label>Bank account</label>
+                                    <input ion-autocomplete name="vehicle_number" type="text" class="ion-autocomplete" ng-model="cq.user_input.bank_account" item-view-value-key="value" max-selected-items="1" items-method="bank_account_search(query, 'Arun Logistics')" placeholder="" />
+                                </ion-item>
+                                <ion-item class="item item-input item-stacked-label icon_field">
+                                    <label>Cheque Date</label>
+                                    <input name="date" type="date" ng-model="cq.user_input.transaction_date " required>
+                                    <span class="date_icon"> <i class="fa fa-calendar"></i></span>
+                                </ion-item>
+                                <ion-item class="item item-input item-stacked-label icon_field take_img">
+                                    <div class="btnnext_main cam_img">
+                                        <div class="row pd0">
+                                            <button class="btn-next " ng-click="cq.addImage()"><i class="ion-plus-circled"></i>Add Image</button>
+                                        </div>
+                                        <div class="show_cam_img">
+                                            <span ng-repeat="img in cq.payslipImages" id="payinslip">
+                                                <img ng-src="{{img}}" style="text-align: center">
+                                                <button class="remove_btn" ng-click="removeImage($index)"><i class="ion-close"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+
+                                </ion-item>
+                            </ion-list>
+                        </form>
+                    </div>
+                </div>
+                <div class="btnnext_main">
+                    <button class="btn-next red_btn" ui-sref="root.cheque.payslipStep3">Upload</button>
+                </div>
+            </div>
+        </ion-content>
+
+    </ion-view>
+</div>

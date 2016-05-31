@@ -1,0 +1,47 @@
+<ion-view class="cus_rem">
+    <ion-content class="body_content">
+        <div class="input_field_list cheque_item_detail">
+            <h2 class="title">Cheque Detail</h2>
+            <div class="cheque_img">
+                <img src="img/cheque.jpg" alt="cheque">
+            </div>
+            <form name="cheque_detail" novalidate class="form_inner">
+                <ion-list>
+                    <!--  Shortage  -->
+                    <ion-item class="item item-input item-stacked-label icon_field">
+                        <label>Posting Date</label>
+                        <p>{{ cq.user_input.transaction_date|date }}</p>
+                    </ion-item>
+                    <ion-item class="item item-input item-stacked-label icon_field">
+                        <label>Cheque Date</label>
+                        <p>{{ cq.user_input.cheque_date }}</p>
+                    </ion-item>
+                    <ion-item class="item item-input item-stacked-label icon_field">
+                        <label>Company Name</label>
+                        <p>{{ cq.user_input.customerAccount }}</p>
+                    </ion-item>
+                    <ion-item class="item item-input item-stacked-label icon_field">
+                        <label>Customer Account</label>
+                        <p>{{ cq.user_input.customerAccount }}</p>
+                    </ion-item>
+                    <ion-item class="item item-input item-stacked-label icon_field">
+                        <label>Amount</label>
+                        <p>{{ cq.user_input.amount }}</p>
+                    </ion-item>
+                    <ion-item class="item item-input item-stacked-label icon_field">
+                        <label>Cheque Number</label>
+                        <p>{{ cq.user_input.chequeNumber }}</p>
+                    </ion-item>
+                    <ion-item class="item item-input item-stacked-label icon_field">
+                        <label>Cheque Bank Name</label>
+                        <p>{{ cq.user_input.bankOfCheque }}</p>
+                    </ion-item>
+                </ion-list>
+            </form>
+        </div>
+        <div class="btnnext_main">
+            <button class="btn-next" ng-click="cq.chequeDataUpload()">Upload</button>
+        </div>
+    </ion-content>
+    <!-- Footer -->
+</ion-view>
