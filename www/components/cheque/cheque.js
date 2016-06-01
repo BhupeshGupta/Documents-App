@@ -5,7 +5,7 @@ angular.module('starter')
 
 function chequeController($scope, DocumentService, $cordovaCamera, $http, SettingsFactory, FileFactory) {
     var cq = this;
-    cq.captureCameraImage = takePhoto;
+    cq.captureCameraImage = clickChequePic;
     cq.addImage = addPayinSlipPhoto;
 
 
@@ -38,6 +38,8 @@ function chequeController($scope, DocumentService, $cordovaCamera, $http, Settin
                 return data.results;
             });
     };
+
+
 
     $scope.chequeList = {
         selected: [],
@@ -129,18 +131,19 @@ function chequeController($scope, DocumentService, $cordovaCamera, $http, Settin
 
     // Capture & dump file
 
-    function takePhoto() {
+    function clickChequePic() {
         var options = {
             quality: 75,
-            destinationType: Camera.DestinationType.DATA_URL,
+            destinationType: Camera.DestinationType.FILE_URI,
             sourceType: Camera.PictureSourceType.CAMERA,
+            allowEdit: false,
             encodingType: Camera.EncodingType.JPEG,
-            targetWidth: 300,
-            targetHeight: 300,
-            popoverOptions: CameraPopoverOptions,
-            saveToPhotoAlbum: false
+            targetWidth: 480,
+            targetHeight: 800,
+            cameraDirection: Camera.Direction.FRONT,
+            saveToPhotoAlbum: false,
+            correctOrientation: true
         };
-
         return $cordovaCamera.getPicture(options).then(
             function (imageURI) {
                 var image_name = imageURI.substring(imageURI.lastIndexOf('/') + 1);
@@ -148,10 +151,9 @@ function chequeController($scope, DocumentService, $cordovaCamera, $http, Settin
             }).then(
             function (fileInfo) {
                 $cordovaCamera.cleanup();
-                return $q.when(fileInfo);
+                $scope.chequeImgURI = fileInfo.dir + fileInfo.file
             });
     }
-
     $scope.choosePhoto = function () {
         var options = {
             quality: 75,
