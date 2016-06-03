@@ -2,15 +2,15 @@
     <div class="bar bar-subheader  ">
         <h2 class="title">{{'INVOICE' | translate }}</h2>
     </div>
-    <ion-view class="body_content invoice_view">
-        <ion-content>
+    <ion-view class="body_content invoice_view invoice_main">
+        <ion-content class="scroll_bar ">
             <div class="row">
                 <div class="col" align="center">
                     <button class="button" ng-click="scanBarcode()">
                         <div class="invoice_icon_img">
                             <img src="img/qr.png">
                         </div>
-                        <p>{{'SCAN' | translate }} Code</p>
+                        <p>Scan Code</p>
                     </button>
                 </div>
             </div>
@@ -26,7 +26,7 @@
                         <div class="invoice_icon_img">
                             <img src="img/enter.png">
                         </div>
-                        <p>{{'ENTER_MANUALLY' | translate }}</p>
+                        <p>Enter Manually</p>
                     </button>
                 </div>
             </div>

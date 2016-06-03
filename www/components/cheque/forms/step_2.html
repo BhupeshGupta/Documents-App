@@ -6,47 +6,61 @@
         <!-- <ion-scroll direction="x" class="available-scroller"> -->
         <div class="content_dtl cheque_edit_dtl">
             <div class="input_field_list">
-                <form name="GR_Form" novalidate class="form_inner">
+                <form name="GR_Form" class="form_inner required_fields">
                     <ion-list>
                         <!--  Shortage  -->
                         <ion-item class="item item-input item-stacked-label icon_field">
-                            <label>Posting Date</label>
-                            <input name="date" type="date" ng-model="cq.user_input.transaction_date " required>
                             <span class="date_icon"> <i class="fa fa-calendar"></i></span>
-                        </ion-item>
-                        <ion-item class="item item-input item-stacked-label icon_field">
-                            <label>Cheque Date</label>
-                            <input name="date" type="date" ng-model="cq.user_input.chequedate" required>
-                            <span class="date_icon"> <i class="fa fa-calendar"></i></span>
+                            <input name="date" type="date" ng-model="cq.user_input.recevingDate ">
+
+                            <label for="date">Receving Date</label>
                         </ion-item>
 
                         <ion-item class="item item-input item-stacked-label icon_field">
-                            <label>Company Name</label>
-                            <input name="company_name" ion-autocomplete type="text" class="ion-autocomplete" ng-model="cq.user_input.companyname" item-view-value-key="value" max-selected-items="1" items-method="company_search(query)" placeholder="" required />
+                            <span class="date_icon"> <i class="fa fa-calendar"></i></span>
+                            <input name="chequedate" type="date" ng-model="cq.user_input.chequeDate" required>
+                            <label for="chequedate">Cheque Date</label>
                         </ion-item>
-                        <ion-item class="item item-input item-stacked-label icon_field">
-                            <label>Customer Account</label>
-                            <input name="vehicle_number" ion-autocomplete type="text" class="ion-autocomplete" ng-model="cq.user_input.customerAccount" item-view-value-key="value" max-selected-items="1" items-method="account_search(query, cq.user_input.companyname.value)" placeholder="" required />
 
+                        <ion-item class="item item-input item-stacked-label icon_field">
+                            <input name="company_name" ion-autocomplete type="text" class="ion-autocomplete" ng-model="cq.user_input.customerName" item-view-value-key="value" max-selected-items="1" items-method="company_search(query)" placeholder="" required/>
+                            <label for="company_name">Company Name</label>
                         </ion-item>
                         <ion-item class="item item-input item-stacked-label icon_field">
-                            <label>Amount</label>
-                            <input type="text " placeholder="Amount " ng-model="cq.user_input.amount ">
+                            <input name="customeraccount" ion-autocomplete type="text" class="ion-autocomplete" ng-model="cq.user_input.customerAccount" item-view-value-key="value" max-selected-items="1" items-method="account_search(query, cq.user_input.customerAccount.value)" placeholder="" required />
+                            <label for="customeraccount">Customer Account</label>
                         </ion-item>
                         <ion-item class="item item-input item-stacked-label icon_field">
-                            <label>Cheque Number</label>
-                            <input type="text " ng-model="cq.user_input.chequeNumber" placeholder="Cheque Number ">
+                            <input name="amount" type="number " placeholder="Amount " ng-model="cq.user_input.amount " required>
+                            <label for="amount">Amount</label>
                         </ion-item>
+
                         <ion-item class="item item-input item-stacked-label icon_field">
-                            <label>Cheque Bank Name</label>
-                            <input type="text " placeholder="Bank " ng-model="cq.user_input.bankOfCheque">
+                            <input type="text" placeholder="chequenumber " ng-model="cq.user_input.chequeNumber" name="Cheque Number " required/>
+                            <label for="chequenumber ">Cheque Number</label>
                         </ion-item>
+
+                        <ion-item class="item item-input item-stacked-label icon_field ">
+                            <input name="company_name" ion-autocomplete type="text" class="ion-autocomplete" ng-model="cq.user_input.bank_search" item-view-value-key="value" max-selected-items="1" items-method="bank_search(query)" placeholder="" required/>
+                            <label for="banknumber ">Cheque Bank Name </label>
+                        </ion-item>
+
                     </ion-list>
+                    <ion-item class="reqired_fields ">
+                        <p ng-show="GR_Form.date.$error.required ">Receving Date is Required</p>
+                        <p ng-show="GR_Form.chequedate.$error.required ">Cheque Date is Required</p>
+                        <p ng-show="GR_Form.company_name.$error.required ">Company Name is Required</p>
+                        <p ng-show="GR_Form.customeraccount.$error.required ">Customer Account is Required</p>
+                        <p ng-show="GR_Form.amount.$error.required ">Amount is Required</p>
+                        <p ng-show="GR_Form.chequenumber.$error.required ">Cheque Number is Required</p>
+                        <p ng-show="GR_Form.banknumber.$error.required ">Bank of Cheque is Required</p>
+                    </ion-item>
+
                 </form>
             </div>
         </div>
-        <div class="btnnext_main">
-            <button class="btn-next" ui-sref="root.cheque.step3">Next</button>
+        <div class="btnnext_main ">
+            <button class="btn-next " ui-sref="root.cheque.step3 " ng-disabled="GR_Form.$invalid ">Next</button>
         </div>
         <!-- </ion-scroll> -->
     </ion-content>

@@ -34,6 +34,7 @@ angular.module('starter')
                     var final_data = [];
                     var intermediateData = JSON.parse(data.data.message);
                     for (var key in intermediateData) {
+                        if (key[0] === '$') continue;
                         final_data.push({
                             "key": key,
                             "value": intermediateData[key]
@@ -41,7 +42,7 @@ angular.module('starter')
                     }
                     $scope.metadata_list = final_data;
                     console.log(JSON.stringify(final_data));
-                    pendingDocs(intermediateData['Consignment Name']);
+                    pendingDocs(intermediateData['Consignment Name'], intermediateData['$amended_from']);
                     $state.go('root.invoice.step2');
                 },
                 function (error) {
@@ -51,8 +52,10 @@ angular.module('starter')
 
         $scope.docs = [];
 
-        function pendingDocs(conNumber) {
-            conNumber = conNumber.substring(0, conNumber.lastIndexOf("-"));
+        function pendingDocs(conNumber, amended) {
+            if (amended) {
+                conNumber = conNumber.substring(0, conNumber.lastIndexOf("-"));
+            }
             $http.get(SettingsFactory.getReviewServerBaseUrl() + '/CurrentStat/?sid=' + SessionService.getToken() + '&where={"cno":"' + conNumber + '","status":["0","2"]}')
                 .then(function (data) {
 

@@ -20,16 +20,17 @@
             <label class="item item-input item-stacked-label status_heading">
                 <span class="input-label">Status</span>
             </label>
-
-            <label class="item item-select" ng-repeat="doc in missingDocs">
-                <span class="input-label">{{ doc.label }}</span>
-            </label>
-            <select required>
-                <option value="Our issue">Our issue</option>
-                <option value="Customer issue">Customer issue</option>
-                <option value="Pending with Customer">Pending with Customer</option>
-                <option value="Other">Other</option>
-            </select>
+            <div class="docs_status" ng-repeat="doc in missingDocs">
+                <label class="item item-select">
+                    <span class="input-label">{{ doc.label }}</span>
+                </label>
+                <select required>
+                    <option value="Our issue">Our issue</option>
+                    <option value="Customer issue">Customer issue</option>
+                    <option value="Pending with Customer">Pending with Customer</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
 
         </div>
 

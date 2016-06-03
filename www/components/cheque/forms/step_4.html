@@ -9,31 +9,31 @@
                 <ion-list>
                     <!--  Shortage  -->
                     <ion-item class="item item-input item-stacked-label icon_field">
-                        <label>Posting Date</label>
-                        <p>{{ cq.user_input.transaction_date|date }}</p>
+                        <label>Posting Date</label>:
+                        <p>{{ cq.user_input.recevingDate|date }}</p>
                     </ion-item>
                     <ion-item class="item item-input item-stacked-label icon_field">
-                        <label>Cheque Date</label>
-                        <p>{{ cq.user_input.cheque_date }}</p>
+                        <label>Cheque Date</label>:
+                        <p>{{ cq.user_input.chequeDate|date }}</p>
                     </ion-item>
                     <ion-item class="item item-input item-stacked-label icon_field">
-                        <label>Company Name</label>
-                        <p>{{ cq.user_input.customerAccount }}</p>
+                        <label>Company Name</label>:
+                        <p>{{ cq.user_input.customerName.value }}</p>
                     </ion-item>
                     <ion-item class="item item-input item-stacked-label icon_field">
-                        <label>Customer Account</label>
-                        <p>{{ cq.user_input.customerAccount }}</p>
+                        <label>Customer Account</label>:
+                        <p>{{ cq.user_input.customerAccount.value }}</p>
                     </ion-item>
                     <ion-item class="item item-input item-stacked-label icon_field">
-                        <label>Amount</label>
+                        <label>Amount</label>:
                         <p>{{ cq.user_input.amount }}</p>
                     </ion-item>
                     <ion-item class="item item-input item-stacked-label icon_field">
-                        <label>Cheque Number</label>
+                        <label>Cheque Number</label>:
                         <p>{{ cq.user_input.chequeNumber }}</p>
                     </ion-item>
                     <ion-item class="item item-input item-stacked-label icon_field">
-                        <label>Cheque Bank Name</label>
+                        <label>Cheque Bank Name</label>:
                         <p>{{ cq.user_input.bankOfCheque }}</p>
                     </ion-item>
                 </ion-list>

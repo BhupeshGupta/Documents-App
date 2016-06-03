@@ -11,13 +11,13 @@
                             <ion-list>
                                 <!--  Shortage  -->
                                 <ion-item class="item item-input item-stacked-label icon_field">
-                                    <label>Bank account</label>
-                                    <input ion-autocomplete name="vehicle_number" type="text" class="ion-autocomplete" ng-model="cq.user_input.bank_account" item-view-value-key="value" max-selected-items="1" items-method="bank_account_search(query, 'Arun Logistics')" placeholder="" />
+                                    <label>Cheque Date</label>
+                                    <input name="chequedate" type="date" ng-model="cq.user_input.date" ng-required="true"><span class="error_mess">*</span>
+                                    <span class="date_icon"> <i class="fa fa-calendar"></i></span>
                                 </ion-item>
                                 <ion-item class="item item-input item-stacked-label icon_field">
-                                    <label>Cheque Date</label>
-                                    <input name="date" type="date" ng-model="cq.user_input.transaction_date " required>
-                                    <span class="date_icon"> <i class="fa fa-calendar"></i></span>
+                                    <label>Bank Account</label>
+                                    <input ion-autocomplete name="date" type="text" class="ion-autocomplete" ng-model="cq.user_input.bankAccount" item-view-value-key="value" max-selected-items="1" items-method="bank_search(query, chequeList.selected[0].company)" placeholder="" />
                                 </ion-item>
                                 <ion-item class="item item-input item-stacked-label icon_field take_img">
                                     <div class="btnnext_main cam_img">
@@ -26,7 +26,7 @@
                                         </div>
                                         <div class="show_cam_img">
                                             <span ng-repeat="img in cq.payslipImages" id="payinslip">
-                                                <img ng-src="{{img}}" style="text-align: center">
+                                                <img ng-src="{{payinslipImgURI}}" style="text-align: center">
                                                 <button class="remove_btn" ng-click="removeImage($index)"><i class="ion-close"></i></button>
                                             </span>
                                         </div>
@@ -38,7 +38,7 @@
                     </div>
                 </div>
                 <div class="btnnext_main">
-                    <button class="btn-next red_btn" ui-sref="root.cheque.payslipStep3">Upload</button>
+                    <button class="btn-next red_btn" ng-click="cq.payinSlipData()">Upload</button>
                 </div>
             </div>
         </ion-content>
