@@ -1,36 +1,36 @@
 <ion-view class="documents_view">
-    <ion-content>
-        <div class="doc_image">
-            <div class="doc_img_block">
-                <div class="doc_thumb_img" ng-repeat="doc in docs">
-                    <div class="doc_text_block">
-                        <div class="doc_main_img">
-                            <img class="image-list-thumb doc-thumb-border-mask clip-circle" ng-src="{{doc.src}} " ng-click="showImage($index) " />
-                        </div>
-                        <p>{{ doc.label }}</p>
-                    </div>
-                </div>
+  <ion-content>
+    <div class="doc_image">
+      <div class="doc_img_block">
+        <div class="doc_thumb_img" ng-repeat="doc in docs">
+          <div class="doc_text_block">
+            <div class="doc_main_img">
+              <img class="image-list-thumb doc-thumb-border-mask clip-circle" ng-src="{{doc.src}} " ng-click="showImage($index) " />
             </div>
+            <p>{{ doc.label }}</p>
+          </div>
         </div>
-        <div class="row doc_mainimg">
-            <img ng-src="{{selectedImage.src}} ">
-            <nav class="glass nav_icons">
-                <div class="glass">
-                    <button ng-click="showImagesInModel()"><span class="ion-arrow-expand f25"></span></button>
-                    <button ng-click="deleteImage() "><span class="ion-trash-b f25"></span></button>
-                    <button><span class="ion-refresh f25"></span></button>
-                </div>
-            </nav>
+      </div>
+    </div>
+    <div class="row doc_mainimg">
+      <img ng-src="{{selectedImage.src}} ">
+      <nav class="glass nav_icons">
+        <div class="glass">
+          <button ng-click="showImagesInModel()"><span class="ion-arrow-expand f25"></span></button>
+          <button ng-click="deleteImage() "><span class="ion-trash-b f25"></span></button>
+          <button><span class="ion-refresh f25"></span></button>
         </div>
-        <div class="btnnext_main ">
-            <div class="row ">
-                <div class="col col-50 ">
-                    <button class="btn-next ">Back</button>
-                </div>
-                <div class="col col-50 ">
-                    <button class="btn-next " ng-click="computeMissingDocsAndGo() ">Next</button>
-                </div>
-            </div>
+      </nav>
+    </div>
+    <div class="btnnext_main ">
+      <div class="row ">
+        <div class="col col-50 ">
+          <button class="btn-next ">Back</button>
         </div>
-    </ion-content>
+        <div class="col col-50 ">
+          <button class="btn-next " ng-click="computeMissingDocsAndGo() ">Next</button>
+        </div>
+      </div>
+    </div>
+  </ion-content>
 </ion-view>

@@ -36,16 +36,15 @@ function settingsFactory($localStorage, $http) {
     },
     getERPServerBaseUrl: function() {
       if (window.location.protocol != 'http:')
-        return 'http://192.168.31.195:8080';
+        return 'https://erp.arungas.com';
       else
         return '/api'
-      return this.get().serverBaseUrl;
     },
     getReviewServerBaseUrl: function() {
       if (window.location.protocol != 'http:')
-      return 'http://192.168.31.195:1337';
+        return 'http://approve.arungas.com/api';
       else
-      return '/review'
+        return '/review'
     },
     loadAppConfig: loadAppConfig
   };

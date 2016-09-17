@@ -190,13 +190,13 @@ angular.module('starter')
 
     $scope.takePic1 = function() {
       var options = {
-        quality: 99,
+        quality: 80,
         destinationType: Camera.DestinationType.FILE_URI,
         sourceType: Camera.PictureSourceType.CAMERA,
         allowEdit: false,
-        encodingType: 1,
-        targetWidth: 1200,
-        targetHeight: 1600,
+        encodingType: Camera.EncodingType.JPEG,
+        targetWidth: 2560,
+        targetHeight: 2560,
         cameraDirection: Camera.Direction.FRONT,
         saveToPhotoAlbum: false,
         correctOrientation: true
@@ -217,7 +217,6 @@ angular.module('starter')
     function enqueue() {
       console.log("i was enetered");
       QueueService.enqueue()
-
     }
 
 
@@ -255,7 +254,7 @@ angular.module('starter')
                     cordova.plugins.notification.local.schedule({
                       id: 1,
                       title: doc.conNumber,
-                      text: doc.label + 'Uploaded successfully'
+                      text: doc.label + ' Uploaded successfully'
                     });
                     $scope.docs.splice(0, $scope.docs.length);
                     if (vm.fromBarCode == true)
@@ -269,5 +268,4 @@ angular.module('starter')
         }
       });
     }
-
   });
