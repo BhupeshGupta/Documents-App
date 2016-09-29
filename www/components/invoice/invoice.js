@@ -59,21 +59,49 @@ angular.module('starter')
       if (amended) {
         conNumber = conNumber.substring(0, conNumber.lastIndexOf("-"));
       }
-      $http.get(SettingsFactory.getReviewServerBaseUrl() + '/CurrentStat/?sid=' + SessionService.getToken() + '&where={"cno":"' + conNumber + '","status":["0","2"]}')
+      $http.get(SettingsFactory.getReviewServerBaseUrl() + '/CurrentStat/?sid=' + SessionService.getToken() + '&where={"cno":"' + conNumber + '"}')
         .then(function(data) {
 
           $scope.docs.splice(0, $scope.docs.length);
 
           data.data.forEach(function(value, index) {
-            console.log(value.doctype);
-            $scope.docs.push({
-              label: value.doctype,
-              mandatory: true,
-              hasValue: false,
-              src: "img/icon-plus.png",
-              action: "addSelf",
-              conNumber: conNumber
-            })
+            if (value.status == 0) {
+              $scope.docs.push({
+                label: value.doctype,
+                mandatory: true,
+                hasValue: false,
+                src: "img/icon-plus.png",
+                action: "addSelf",
+                conNumber: conNumber
+              })
+            } else if (value.status == 1) {
+              $scope.docs.push({
+                label: value.doctype,
+                mandatory: true,
+                hasValue: false,
+                src: "img/right.png",
+                action: "addSelf",
+                conNumber: conNumber
+              })
+            } else if (value.status == 2) {
+              $scope.docs.push({
+                label: value.doctype,
+                mandatory: true,
+                hasValue: false,
+                src: "img/reject.png",
+                action: "addSelf",
+                conNumber: conNumber
+              })
+            } else if (value.status == 3) {
+              $scope.docs.push({
+                label: value.doctype,
+                mandatory: true,
+                hasValue: false,
+                src: "img/queue.png",
+                action: "addSelf",
+                conNumber: conNumber
+              })
+            }
           })
 
           $scope.docs.push({
@@ -86,6 +114,8 @@ angular.module('starter')
           $scope.selectedImage.index = 0;
         });
     }
+
+
 
 
     $scope.showImage = function(index) {
@@ -198,14 +228,45 @@ angular.module('starter')
         targetWidth: 2560,
         targetHeight: 2560,
         cameraDirection: Camera.Direction.FRONT,
-        saveToPhotoAlbum: false,
+        saveToPhotoAlbum: true,
         correctOrientation: true
       };
 
       return $cordovaCamera.getPicture(options).then(
         function(imageURI) {
+          // imageURI = imageURI.replace("file://", "")
+          // var image_name = imageURI.substring(imageURI.lastIndexOf('/') + 1);
+          // FileFactory.moveFileFromCameraToExtrenalDir(image_name).then(
+          //   function(data) {
+          //     console.log(data);
+          //
+          //   }
+          // );
           var image_name = imageURI.substring(imageURI.lastIndexOf('/') + 1);
-          return FileFactory.moveFileFromCameraToExtrenalDir(image_name);
+
+          return $q(function(resolve, reject) {
+            cordovaCamscanner.scan(
+              imageURI,
+              function(response) {
+                console.log("success: " + response);
+                var signature_blob = FileDataService.dataURItoBlob(response, 'image/png');
+                $cordovaFile.writeFile(cordova.file.dataDirectory, image_name, signature_blob, true)
+                  .then(function(file) {
+                    resolve({
+                      dir: cordova.file.dataDirectory,
+                      file: image_name
+                    })
+                  });
+              },
+              function(response) {
+                console.log("error: " + response);
+                reject(response);
+              }
+            );
+          });
+
+          // var image_name = imageURI.substring(imageURI.lastIndexOf('/') + 1);
+          // return FileFactory.moveFileFromCameraToExtrenalDir(image_name);
         }).then(
         function(fileInfo) {
           $cordovaCamera.cleanup();
