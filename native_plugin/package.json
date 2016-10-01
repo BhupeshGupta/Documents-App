@@ -1,0 +1,27 @@
+{
+  "name": "cordova-camscanner",
+  "version": "1.2.2",
+  "description": "Cordova Camscanner Plugin",
+  "cordova": {
+    "id": "cordova-camscanner",
+    "platforms": []
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Beelphegor/cordova-camscanner.git"
+  },
+  "keywords": [
+    "cordova",
+    "camscanner",
+    "ecosystem:cordova"
+  ],
+  "author": "Beelphegor",
+  "license": "Apache 2.0",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "bugs": {
+    "url": "https://github.com/Beelphegor/cordova-camscanner/issues"
+  },
+  "homepage": "https://github.com/Beelphegor/cordova-camscanner#readme"
+}

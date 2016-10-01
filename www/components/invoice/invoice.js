@@ -228,35 +228,62 @@ angular.module('starter')
         targetWidth: 2560,
         targetHeight: 2560,
         cameraDirection: Camera.Direction.FRONT,
-        saveToPhotoAlbum: true,
-        correctOrientation: true
+        //saveToPhotoAlbum: true,
+        //correctOrientation: true
       };
 
       return $cordovaCamera.getPicture(options).then(
         function(imageURI) {
-          // imageURI = imageURI.replace("file://", "")
-          // var image_name = imageURI.substring(imageURI.lastIndexOf('/') + 1);
-          // FileFactory.moveFileFromCameraToExtrenalDir(image_name).then(
-          //   function(data) {
-          //     console.log(data);
-          //
-          //   }
-          // );
+
           var image_name = imageURI.substring(imageURI.lastIndexOf('/') + 1);
 
           return $q(function(resolve, reject) {
             cordovaCamscanner.scan(
               imageURI,
+              cordova.file.externalCacheDirectory,
               function(response) {
                 console.log("success: " + response);
-                var signature_blob = FileDataService.dataURItoBlob(response, 'image/png');
-                $cordovaFile.writeFile(cordova.file.dataDirectory, image_name, signature_blob, true)
-                  .then(function(file) {
-                    resolve({
-                      dir: cordova.file.dataDirectory,
-                      file: image_name
-                    })
+                var index = response.lastIndexOf('/') + 1;
+                // resolve({
+                //     dir: response.substring(0, index),
+                //     file: response.substring(index)
+                //   })
+                //
+                // console.log("About to move " + response.substring(index));
+                // $cordovaFile.moveFile(
+                //   'file:///storage/emulated/0/Android/data/com.ionicframework.field573625/cache/',
+                //   response.substring(index),
+                //   cordova.file.dataDirectory
+                // ).
+                // then(function(data) {
+                //     console.log(data);
+                //   }).catch(function(err) {
+                //     console.log(err);
+                //   })
+                $cordovaFile.moveFile(
+                  cordova.file.externalCacheDirectory,
+                  response.substring(index),
+                  cordova.file.dataDirectory
+                ).then(function() {
+                  resolve({
+                    // dir: cordova.file.externalCacheDirectory,
+                    dir: cordova.file.dataDirectory,
+                    file: response.substring(index)
                   });
+                }).
+                catch(function(err) {
+                  console.log(err);
+                });
+
+
+                // return FileFactory.
+                // moveFileFromCameraToExtrenalDir(response.substring(index)).
+                // then(function(fileInfo) {
+                //   resolve(fileInfo)
+                // }).
+                // catch(function(err) {
+                //   console.log(err);
+                // });
               },
               function(response) {
                 console.log("error: " + response);

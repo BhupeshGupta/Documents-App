@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-camscanner" version="0.1.0">
+    <name>CordovaCamscanner</name>
+    <description>Cordova Camscanner Plugin</description>
+    <author>Beelphegor</author>
+    <license>Apache 2.0</license>
+    <keywords>cordova,camscanner</keywords>
+    <js-module src="www/CordovaCamscanner.js" name="CordovaCamscanner">
+        <clobbers target="cordovaCamscanner" />
+    </js-module>
+    <platform name="android">
+        <preference name="ANDROID_APP_KEY" />
+        <source-file src="src/android/camscanner.xml" target-dir="res/values" />
+        <config-file target="res/values/camscanner.xml" parent="/*">
+            <string name="camscanner_app_key">$ANDROID_APP_KEY</string>
+        </config-file>
+        <config-file target="config.xml" parent="/*">
+            <feature name="CordovaCamscanner">
+                <param name="android-package" value="com.beelphegor.cordovacamscanner.CordovaCamscanner"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="com.beelphegor.cordovacamscanner.CamscannerActivity" ></activity>
+        </config-file>
+        <source-file src="lib/android/csopensdk.jar" target-dir="libs" />
+        <source-file src="src/android/CordovaCamscanner.java" target-dir="src/com/beelphegor/cordovacamscanner" />
+        <source-file src="src/android/CamscannerActivity.java" target-dir="src/com/beelphegor/cordovacamscanner" />
+        <source-file src="src/android/Util.java" target-dir="src/com/beelphegor/cordovacamscanner" />
+    </platform>
+    <platform name="ios">
+        <preference name="IOS_APP_KEY" />
+        <preference name="BUNDLE_ID" />
+        <config-file target="*-Info.plist" parent="CamscannerAppKey">
+            <string>$IOS_APP_KEY</string>
+        </config-file>
+        <config-file target="*-Info.plist" parent="CFBundleURLTypes">
+            <array>
+                <dict>
+                    <key>CFBundleURLSchemes</key>
+                    <array>
+                        <string>$BUNDLE_ID</string>
+                    </array>
+                </dict>
+            </array>
+        </config-file>
+        <config-file target="*-Info.plist" parent="LSApplicationQueriesSchemes">
+            <array>
+            <string>camscannerfree</string>
+            <string>camscanner</string>
+            <string>camscannerpro</string>
+            <string>camscannerhd</string>
+            <string>camscannerhdpro</string>
+            </array>
+        </config-file>
+        <config-file target="config.xml" parent="/*">
+            <feature name="CordovaCamscanner">
+                <param name="ios-package" value="CordovaCamscanner"/>
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/CordovaCamscanner.h"/>
+        <source-file src="src/ios/CordovaCamscanner.m" />
+        <header-file src="src/ios/AppDelegate+camscanner.h"/>
+        <source-file src="src/ios/AppDelegate+camscanner.m" />
+        <header-file src="src/ios/ISBlockActionSheet.h" />
+        <source-file src="src/ios/ISBlockActionSheet.m" />
+        <framework src="lib/ios/CamScannerOpenAPIFramework.framework" custom="true" />
+    </platform>
+</plugin>
