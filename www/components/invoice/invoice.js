@@ -244,29 +244,13 @@ angular.module('starter')
               function(response) {
                 console.log("success: " + response);
                 var index = response.lastIndexOf('/') + 1;
-                // resolve({
-                //     dir: response.substring(0, index),
-                //     file: response.substring(index)
-                //   })
-                //
-                // console.log("About to move " + response.substring(index));
-                // $cordovaFile.moveFile(
-                //   'file:///storage/emulated/0/Android/data/com.ionicframework.field573625/cache/',
-                //   response.substring(index),
-                //   cordova.file.dataDirectory
-                // ).
-                // then(function(data) {
-                //     console.log(data);
-                //   }).catch(function(err) {
-                //     console.log(err);
-                //   })
+
                 $cordovaFile.moveFile(
                   cordova.file.externalCacheDirectory,
                   response.substring(index),
                   cordova.file.dataDirectory
                 ).then(function() {
                   resolve({
-                    // dir: cordova.file.externalCacheDirectory,
                     dir: cordova.file.dataDirectory,
                     file: response.substring(index)
                   });
@@ -275,15 +259,6 @@ angular.module('starter')
                   console.log(err);
                 });
 
-
-                // return FileFactory.
-                // moveFileFromCameraToExtrenalDir(response.substring(index)).
-                // then(function(fileInfo) {
-                //   resolve(fileInfo)
-                // }).
-                // catch(function(err) {
-                //   console.log(err);
-                // });
               },
               function(response) {
                 console.log("error: " + response);

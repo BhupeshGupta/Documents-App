@@ -23,7 +23,6 @@ public class CordovaCamscanner extends CordovaPlugin {
                 Context context = this.cordova.getActivity().getApplicationContext();
                 Intent intent = new Intent(context, CamscannerActivity.class);
                 intent.putExtra("SRC_URI", srcUri);
-                intent.putExtra("DEST_PATH", args.getString(1));
                 intent.putExtra("PATH", path);
                 cordova.setActivityResultCallback (this);
                 this.cordova.getActivity().startActivityForResult(intent, 2);

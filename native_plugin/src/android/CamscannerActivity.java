@@ -22,21 +22,19 @@ public class CamscannerActivity extends Activity {
     String _destPath;
     String fileName;
     private final int REQ_CODE_CALL_CAMSCANNER = 2;
-    String _tempPath;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Intent intent = this.getIntent();
         String srcUri =  intent.getStringExtra("SRC_URI");
-        _destPath =  intent.getStringExtra("DEST_PATH");
-        _tempPath = intent.getStringExtra("PATH");
-        _destPath = _tempPath;
+        _destPath = intent.getStringExtra("PATH");
         int appResId = this.getResources().getIdentifier("camscanner_app_key", "string", this.getPackageName());
         String appKey = this.getString(appResId);
         api = CSOpenApiFactory.createCSOpenApi(this.getApplicationContext(), appKey, null);
         fileName = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new java.util.Date());
-        _scannedFileUri = _tempPath + "/" + fileName;
+        _scannedFileUri = _destPath + "/" + fileName;
         CSOpenAPIParam openApiParam = new CSOpenAPIParam(
                 srcUri,
                 _scannedFileUri + ".jpg",
@@ -59,11 +57,6 @@ public class CamscannerActivity extends Activity {
                     File from = new File( _scannedFileUri + ".jpg");
                     File to = new File(_destPath + fileName + ".jpg");
                     from.renameTo(to);
-                    // Bitmap mBitmap = Util.loadBitmap(_scannedFileUri + ".jpg");
-                    // ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                    // mBitmap.compress(Bitmap.CompressFormat.JPEG, 80, baos);
-                    // byte[] byteArrayImage = baos.toByteArray();
-                    // String encodedImage = Base64.encodeToString(byteArrayImage, Base64.DEFAULT);
                     databackIntent.putExtra("BASE64_RESULT", _destPath + fileName + ".jpg");
                     setResult(Activity.RESULT_OK, databackIntent);
                     finish();
