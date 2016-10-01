@@ -37,9 +37,7 @@ public class CamscannerActivity extends Activity {
         _scannedFileUri = _destPath + "/" + fileName;
         CSOpenAPIParam openApiParam = new CSOpenAPIParam(
                 srcUri,
-                _scannedFileUri + ".jpg",
-                _scannedFileUri + ".pdf",
-                _scannedFileUri + "_org.jpg",
+                _scannedFileUri + ".jpg",null,null,
                 1.0f);
         boolean res = api.scanImage(this, 2, openApiParam);
     }
