@@ -9,6 +9,8 @@ angular.module('starter')
     vm.uploadDoc = uploadDoc;
     vm.enqueue = enqueue;
     vm.fromBarCode = false;
+    vm.maxHeight;
+    vm.maxWidth;
     $scope.invoiceEnterMaually = function() {
       $state.go('root.invoice.enter_data_manually');
     };
@@ -219,14 +221,24 @@ angular.module('starter')
     };
 
     $scope.takePic1 = function() {
+      maximumResolution.getMaxHeightWidth(function(response) {
+          response = response.split("*");
+          vm.maxHeigh = response[1];
+          vm.maxWidth = response[0];
+          console.log(response);
+        },
+        function(err) {
+          conosle.log(err);
+        });
+
       var options = {
         quality: 80,
         destinationType: Camera.DestinationType.FILE_URI,
         sourceType: Camera.PictureSourceType.CAMERA,
         allowEdit: false,
         encodingType: Camera.EncodingType.JPEG,
-        targetWidth: 2560,
-        targetHeight: 2560,
+        targetWidth: vm.maxWidth,
+        targetHeight: vm.maxHeigh,
         cameraDirection: Camera.Direction.FRONT,
         //saveToPhotoAlbum: true,
         //correctOrientation: true
